@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+      SA_PASSWORD: "YourStrong!Passw0rd"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_DIALECT=mssql+pyodbc
+      - DB_DRIVER=ODBC Driver 18 for SQL Server
+      - DB_HOST=db
+      - DB_PORT=1433
+      - DB_USER=sa
+      - DB_PASSWORD=YourStrong!Passw0rd
+      - DB_NAME=credit_analysis_db
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+volumes:
+  mssql_data:
