@@ -111,3 +111,7 @@ The Streamlit UI mirrors the blueprint:
 - This README: quick-start plus architecture summary.
 
 For next steps (database schema, FastAPI module TODOs, etc.) extend the blueprint or request the companion "FastAPI module checklist" mentioned in the document.
+
+## 作者
+
+stormchaser
